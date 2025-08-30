@@ -68,11 +68,11 @@ function App() {
   };
 
   const getScore = (competitors, gameStatus) => {
-    if (!competitors || competitors.length < 2) return '';
+    if (!competitors || competitors.length < 2) return '0-0';
     
-    // If game hasn't started yet, don't show scores
+    // If game hasn't started yet, show 0-0
     if (gameStatus === 'pre' || !competitors[0].score || !competitors[1].score) {
-      return '';
+      return '0-0';
     }
     
     return `${competitors[0].score} - ${competitors[1].score}`;
@@ -209,67 +209,63 @@ function App() {
         )}
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-full fallback-table" style={{minWidth: '700px'}}>
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    #
-                  </th>
-                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Dude
-                  </th>
-                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Team
-                  </th>
-                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Passing Yards
-                  </th>
-                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Score
-                  </th>
-                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {sortedData.map((row, index) => {
-                  const prevYards = previousYards.current[row.dude] || 0;
-                  const hasIncreased = row.passingYards > prevYards;
-                  
-                  if (row.passingYards !== null) {
-                    previousYards.current[row.dude] = row.passingYards;
-                  }
-                  
-                  return (
-                    <tr key={row.dude} className="hover:bg-gray-50">
-                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900 font-semibold">
-                        {index + 1}
-                      </td>
-                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900" style={{fontWeight: '600'}}>
-                        {row.dude}
-                      </td>
-                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900" style={{wordBreak: 'break-word', minWidth: '80px'}}>
-                        {row.teamName}
-                      </td>
-                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900 font-bold">
-                        <span className={hasIncreased ? 'animate-pulse text-green-600 font-bold fallback-pulse' : 'text-blue-600'}>
-                          {row.passingYards !== null ? row.passingYards : '—'}
-                        </span>
-                      </td>
-                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
-                        {row.score}
-                      </td>
-                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900" style={{wordBreak: 'break-word', minWidth: '60px'}}>
-                        {row.status}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <table className="w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-1 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  #
+                </th>
+                <th className="px-1 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Name
+                </th>
+                <th className="px-1 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                  Team
+                </th>
+                <th className="px-1 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Yards
+                </th>
+                <th className="px-1 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                  Score
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {sortedData.map((row, index) => {
+                const prevYards = previousYards.current[row.dude] || 0;
+                const hasIncreased = row.passingYards > prevYards;
+                
+                if (row.passingYards !== null) {
+                  previousYards.current[row.dude] = row.passingYards;
+                }
+                
+                return (
+                  <tr key={row.dude} className="hover:bg-gray-50">
+                    <td className="px-1 sm:px-4 lg:px-6 py-3 sm:py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                      {index + 1}
+                    </td>
+                    <td className="px-1 sm:px-4 lg:px-6 py-3 sm:py-4 text-sm font-medium text-gray-900">
+                      <div className="font-semibold">{row.dude}</div>
+                      <div className="text-xs text-gray-500 sm:hidden">
+                        <div>{row.teamName}</div>
+                        <div>{row.score} • {row.status}</div>
+                      </div>
+                    </td>
+                    <td className="px-1 sm:px-4 lg:px-6 py-3 sm:py-4 text-sm text-gray-900 hidden sm:table-cell">
+                      {row.teamName}
+                    </td>
+                    <td className="px-1 sm:px-4 lg:px-6 py-3 sm:py-4 whitespace-nowrap text-sm font-bold">
+                      <div className={`text-lg font-bold ${hasIncreased ? 'animate-pulse text-green-600' : 'text-blue-600'}`}>
+                        {row.passingYards !== null ? row.passingYards : '—'}
+                      </div>
+                    </td>
+                    <td className="px-1 sm:px-4 lg:px-6 py-3 sm:py-4 text-sm text-gray-900 hidden sm:table-cell">
+                      {row.score}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
