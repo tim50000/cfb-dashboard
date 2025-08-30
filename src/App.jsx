@@ -43,11 +43,13 @@ function App() {
     const passingStats = statistics.find(stat => 
       stat.name && 
       stat.name.toLowerCase().includes('pass') && 
-      (stat.name.toLowerCase().includes('yd') || stat.name.toLowerCase().includes('yard'))
+      (stat.name.toLowerCase().includes('yd') || stat.name.toLowerCase().includes('yard') || stat.name.toLowerCase().includes('yards'))
     );
     
-    if (passingStats && passingStats.displayValue) {
-      const numericValue = parseInt(passingStats.displayValue.replace(/[^0-9-]/g, ''), 10);
+    if (passingStats && (passingStats.displayValue || passingStats.value !== undefined)) {
+      // Try displayValue first, then value
+      const rawValue = passingStats.displayValue || passingStats.value;
+      const numericValue = parseInt(String(rawValue).replace(/[^0-9-]/g, ''), 10);
       return isNaN(numericValue) ? 0 : numericValue;
     }
     
@@ -124,7 +126,7 @@ function App() {
             const competitors = competition?.competitors || [];
             
             const matchedTeam = summaryData.boxscore?.teams?.find(team => 
-              exactTeamMatch(teamName, { team })
+              exactTeamMatch(teamName, team)
             );
             
             const passingYards = matchedTeam ? extractPassingYards(matchedTeam.statistics) : null;
