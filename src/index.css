@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fallback styles if Tailwind doesn't load */
+/* Fallback styles with simple blue color scheme */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background-color: #f3f4f6;
+  background-color: #f0f9ff; /* Light blue background */
 }
 
 .fallback-container {
@@ -21,6 +21,7 @@ body {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   padding: 24px;
   margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
 }
 
 .fallback-table {
@@ -33,12 +34,12 @@ body {
 }
 
 .fallback-table th {
-  background-color: #f9fafb;
+  background-color: #dbeafe; /* Light blue header */
   padding: 12px 24px;
   text-align: left;
   font-size: 12px;
-  font-weight: 500;
-  color: #6b7280;
+  font-weight: 600;
+  color: #1e40af; /* Blue text */
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -47,16 +48,16 @@ body {
   padding: 16px 24px;
   border-top: 1px solid #e5e7eb;
   font-size: 14px;
-  color: #111827;
+  color: #374151; /* Dark gray text */
 }
 
 .fallback-table tr:hover {
-  background-color: #f9fafb;
+  background-color: #f8fafc; /* Light gray hover */
 }
 
 .fallback-pulse {
   animation: pulse 2s infinite;
-  color: #059669;
+  color: #15803d; /* Forest green for increased yards */
   font-weight: bold;
 }
 
@@ -82,5 +83,6 @@ body {
 }
 
 .fallback-loading {
-  color: #2563eb;
+  color: #2563eb; /* Blue loading indicator */
+  font-weight: 500;
 }

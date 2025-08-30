@@ -188,14 +188,20 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 fallback-container" style={{minHeight: '100vh', backgroundColor: '#f3f4f6', padding: '16px'}}>
+    <div className="min-h-screen bg-gray-100 p-4 fallback-container" style={{minHeight: '100vh', backgroundColor: '#f0f9ff', padding: '16px'}}>
       <div className="max-w-6xl mx-auto" style={{maxWidth: '1200px', margin: '0 auto'}}>
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6 fallback-card">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2" style={{fontSize: '30px', fontWeight: 'bold', color: '#111827', marginBottom: '8px'}}>
-            Fantasy Fellas Draft Order Tracker – Aug 30, 2025
-          </h1>
-          <p className="text-gray-600" style={{color: '#6b7280'}}>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-3xl font-bold text-gray-900" style={{fontSize: '30px', fontWeight: 'bold', color: '#1e40af'}}>
+              Fantasy Fellas Draft Order Tracker – Aug 30, 2025
+            </h1>
+            {loading && <div className="text-blue-600 fallback-loading">Loading...</div>}
+          </div>
+          <p className="text-gray-600 mb-1" style={{color: '#6b7280'}}>
             Updated {lastUpdated ? lastUpdated.toLocaleTimeString() : 'Never'}
+          </p>
+          <p className="text-gray-600 text-sm" style={{color: '#6b7280', fontSize: '14px'}}>
+            Data from ESPN public APIs • Polling every 15 seconds
           </p>
         </div>
 
@@ -204,16 +210,6 @@ function App() {
             Error: {error}
           </div>
         )}
-
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 fallback-card">
-          <div className="flex items-center justify-between mb-4 fallback-status">
-            <h2 className="text-xl font-semibold" style={{fontSize: '20px', fontWeight: '600'}}>Status</h2>
-            {loading && <div className="text-blue-600 fallback-loading">Loading...</div>}
-          </div>
-          <p className="text-gray-600 text-sm" style={{color: '#6b7280', fontSize: '14px'}}>
-            Data from ESPN public APIs • Polling every 15 seconds • Exact team matching only
-          </p>
-        </div>
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <table className="w-full fallback-table">
