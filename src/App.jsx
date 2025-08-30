@@ -19,7 +19,6 @@ const GAME_DATE = '20250830';
 
 function App() {
   const [gameData, setGameData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const previousYards = useRef({});
@@ -80,7 +79,6 @@ function App() {
   };
 
   const fetchGameData = async () => {
-    setLoading(true);
     setError(null);
     
     try {
@@ -161,8 +159,6 @@ function App() {
     } catch (err) {
       setError(err.message);
       console.error('Error fetching game data:', err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -190,89 +186,90 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 fallback-container" style={{minHeight: '100vh', backgroundColor: '#f0f9ff', padding: '16px'}}>
+    <div className="min-h-screen bg-gray-100 p-2 sm:p-4 fallback-container" style={{minHeight: '100vh', backgroundColor: '#f0f9ff', padding: '8px'}}>
       <div className="max-w-6xl mx-auto" style={{maxWidth: '1200px', margin: '0 auto'}}>
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 fallback-card">
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-3xl font-bold text-gray-900" style={{fontSize: '30px', fontWeight: 'bold', color: '#1e40af'}}>
+        <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6 mb-4 sm:mb-6 fallback-card">
+          <div className="mb-2">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" style={{fontSize: 'clamp(18px, 4vw, 30px)', fontWeight: 'bold', color: '#1e40af', lineHeight: '1.2'}}>
               Fantasy Fellas Draft Order Tracker – Aug 30, 2025
             </h1>
-            {loading && <div className="text-blue-600 fallback-loading">Loading...</div>}
           </div>
-          <p className="text-gray-600 mb-1" style={{color: '#6b7280'}}>
+          <p className="text-gray-600 mb-1 text-sm" style={{color: '#6b7280', fontSize: '14px'}}>
             Updated {lastUpdated ? lastUpdated.toLocaleTimeString() : 'Never'}
           </p>
-          <p className="text-gray-600 text-sm" style={{color: '#6b7280', fontSize: '14px'}}>
+          <p className="text-gray-600 text-xs sm:text-sm" style={{color: '#6b7280', fontSize: '12px'}}>
             Data from ESPN public APIs • Polling every 15 seconds
           </p>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 fallback-error">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-3 sm:px-4 py-3 rounded mb-4 sm:mb-6 text-sm fallback-error">
             Error: {error}
           </div>
         )}
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <table className="w-full fallback-table">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  #
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Dude
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Team
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Passing Yards
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Score
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Game Status / Start
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {sortedData.map((row, index) => {
-                const prevYards = previousYards.current[row.dude] || 0;
-                const hasIncreased = row.passingYards > prevYards;
-                
-                if (row.passingYards !== null) {
-                  previousYards.current[row.dude] = row.passingYards;
-                }
-                
-                return (
-                  <tr key={row.dude} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {index + 1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" style={{fontWeight: '500'}}>
-                      {row.dude}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {row.teamName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <span className={hasIncreased ? 'animate-pulse text-green-600 font-bold fallback-pulse' : ''}>
-                        {row.passingYards !== null ? row.passingYards : '—'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {row.score}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {row.status}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-full fallback-table" style={{minWidth: '700px'}}>
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    #
+                  </th>
+                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Dude
+                  </th>
+                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Team
+                  </th>
+                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Passing Yards
+                  </th>
+                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Score
+                  </th>
+                  <th className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {sortedData.map((row, index) => {
+                  const prevYards = previousYards.current[row.dude] || 0;
+                  const hasIncreased = row.passingYards > prevYards;
+                  
+                  if (row.passingYards !== null) {
+                    previousYards.current[row.dude] = row.passingYards;
+                  }
+                  
+                  return (
+                    <tr key={row.dude} className="hover:bg-gray-50">
+                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900 font-semibold">
+                        {index + 1}
+                      </td>
+                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900" style={{fontWeight: '600'}}>
+                        {row.dude}
+                      </td>
+                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900" style={{wordBreak: 'break-word', minWidth: '80px'}}>
+                        {row.teamName}
+                      </td>
+                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900 font-bold">
+                        <span className={hasIncreased ? 'animate-pulse text-green-600 font-bold fallback-pulse' : 'text-blue-600'}>
+                          {row.passingYards !== null ? row.passingYards : '—'}
+                        </span>
+                      </td>
+                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                        {row.score}
+                      </td>
+                      <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900" style={{wordBreak: 'break-word', minWidth: '60px'}}>
+                        {row.status}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
