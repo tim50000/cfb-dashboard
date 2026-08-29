@@ -1,12 +1,38 @@
-# React + Vite
+# College Football Draw and Trackers
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Separate college-football team draws and passing-yard trackers for Fantasy Fellas and Listen Labs.
 
-Currently, two official plugins are available:
+## Pages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `/fantasy-fellas-2026` — Fantasy Fellas passing-yards tracker
+- `/fantasy-fellas-2026/draw` — Fantasy Fellas team draw
+- `/listen-2026` — Listen Labs passing-yards tracker
+- `/listen-2026/draw` — Listen Labs team draw
+- `/listen-2026/teams` — Listen Labs 24-player team assignment
+- `/fantasy-fellas-2025` — archived 2025 dashboard
 
-## Expanding the ESLint configuration
+The root route opens the 2026 leaderboard. ESPN's public college football scoreboard and summary feeds provide schedules, scores, game states, logos, and team passing yards.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Team draw
+
+Run a cryptographically random draw from every college team scheduled on a date:
+
+```bash
+npm run assign:ff -- 2026-09-05
+npm run assign:listen -- 2026-09-05
+```
+
+The scripts require at least 12 scheduled teams, assign one unique team to each person, and write separate official assignment files for Fantasy Fellas and Listen Labs.
+
+Each draw page can also run practice draws in the browser and copy or download its results. Browser draws do not overwrite either official repository file.
+
+The Listen Labs team-assignment page randomly pairs 24 players into 12 teams of two with an animated one-second placement for each player.
+
+## Local development
+
+```bash
+npm ci
+npm run dev
+```
+
+Create a production build with `npm run build`. The post-build step adds a GitHub Pages fallback so direct visits to each client-side route work.

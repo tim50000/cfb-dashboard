@@ -1,0 +1,137 @@
+{
+  "season": 2026,
+  "date": "2026-08-29",
+  "drawId": "20260829-mteota6o",
+  "generatedAt": "2026-08-29T18:01:41.328Z",
+  "poolSize": 16,
+  "eligibleTeams": [
+    "North Carolina",
+    "TCU",
+    "San José State",
+    "USC",
+    "NC State",
+    "Virginia",
+    "Jacksonville State",
+    "North Dakota State",
+    "Sacramento State",
+    "Eastern Michigan",
+    "Hawai'i",
+    "Stanford",
+    "New Mexico State",
+    "Florida State",
+    "Memphis",
+    "UNLV"
+  ],
+  "assignments": [
+    {
+      "person": "Blake",
+      "team": "Jacksonville State"
+    },
+    {
+      "person": "Chris",
+      "team": "North Carolina"
+    },
+    {
+      "person": "David",
+      "team": "Sacramento State"
+    },
+    {
+      "person": "Higgins",
+      "team": "NC State"
+    },
+    {
+      "person": "Nic",
+      "team": "Florida State"
+    },
+    {
+      "person": "Q",
+      "team": "TCU"
+    },
+    {
+      "person": "Sam",
+      "team": "UNLV"
+    },
+    {
+      "person": "Shyam",
+      "team": "Hawai'i"
+    },
+    {
+      "person": "Steven",
+      "team": "Virginia"
+    },
+    {
+      "person": "Tommy",
+      "team": "San José State"
+    },
+    {
+      "person": "Vandy",
+      "team": "Stanford"
+    },
+    {
+      "person": "Will",
+      "team": "Memphis"
+    }
+  ],
+  "teams": {
+    "Jacksonville State": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/55.png",
+      "opponent": "N Dakota St",
+      "event": "JVST @ NDSU"
+    },
+    "North Carolina": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/153.png",
+      "opponent": "TCU",
+      "event": "UNC VS TCU"
+    },
+    "Sacramento State": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/16.png",
+      "opponent": "E Michigan",
+      "event": "SAC @ EMU"
+    },
+    "NC State": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png",
+      "opponent": "Virginia",
+      "event": "NCSU @ UVA"
+    },
+    "Florida State": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png",
+      "opponent": "New Mexico St",
+      "event": "NMSU @ FSU"
+    },
+    "TCU": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png",
+      "opponent": "North Carolina",
+      "event": "UNC VS TCU"
+    },
+    "UNLV": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png",
+      "opponent": "Memphis",
+      "event": "MEM @ UNLV"
+    },
+    "Hawai'i": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/62.png",
+      "opponent": "Stanford",
+      "event": "HAW @ STAN"
+    },
+    "Virginia": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
+      "opponent": "NC State",
+      "event": "NCSU @ UVA"
+    },
+    "San José State": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/23.png",
+      "opponent": "USC",
+      "event": "SJSU @ USC"
+    },
+    "Stanford": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/24.png",
+      "opponent": "Hawai'i",
+      "event": "HAW @ STAN"
+    },
+    "Memphis": {
+      "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/235.png",
+      "opponent": "UNLV",
+      "event": "MEM @ UNLV"
+    }
+  }
+}
